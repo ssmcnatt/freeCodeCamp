@@ -1,0 +1,33 @@
+function checkDiv(num, low, high) {
+  for (let i = low; i <= high; i++) {
+    if (num % i !== 0) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function smallestCommons(arr) {
+  let low, high;
+  if (arr[0] < arr[1]) {
+    low = arr[0];
+    high = arr[1];
+  } else {
+    low = arr[1];
+    high = arr[0];
+  }
+
+  let returnNum = 0;
+  let checkNum = high;
+  while (returnNum === 0) {
+    if (checkDiv(checkNum, low, high)) {
+      returnNum = checkNum;
+    } else {
+      checkNum += high;
+    }
+  }
+  return returnNum;
+}
+
+
+smallestCommons([1,5]);

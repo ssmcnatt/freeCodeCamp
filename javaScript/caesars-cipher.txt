@@ -1,0 +1,23 @@
+function rot13(str) { // LBH QVQ VG!
+  let newStr = '', 
+      asc,
+      valA = 'A'.charCodeAt(0),
+      valZ = 'Z'.charCodeAt(0);
+
+  for (let char of str) {
+    asc = char.charCodeAt(0);
+    if (asc >= valA && asc <= valZ) {
+      asc = char.charCodeAt(0) - 13;
+      if (asc < valA) {
+        asc = char.charCodeAt(0) + 13;
+      }
+    }
+    
+    newStr += String.fromCharCode(asc);
+  }
+
+  return newStr;
+}
+
+// Change the inputs below to test
+rot13("SERR PBQR PNZC");

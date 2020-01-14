@@ -1,0 +1,27 @@
+function pairElement(str) {
+  let retArr = [];
+  let pair = '';
+
+  let strArr = str.split('');
+  for (let char of strArr) {
+    switch (char) {
+      case 'A':
+        pair = 'AT';
+        break;
+      case 'T':
+        pair = 'TA';
+        break;
+      case 'C':
+        pair = 'CG';
+        break;
+      case 'G':
+        pair = 'GC';
+        break;
+    }
+    retArr.push(pair.split(''));
+  }
+
+  return retArr;
+}
+
+pairElement("GCG");

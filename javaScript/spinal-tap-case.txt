@@ -1,0 +1,22 @@
+function spinalCase(str) {
+  // "It's such a fine line between stupid, and clever."
+  // --David St. Hubbins
+  let newStr = '';
+  let arr = str.split(/[^A-Za-z0-9]/);
+  let newArr = [];
+  arr.map(word => {
+    word = word.replace(/([A-Z])/g, function(match) {
+       return " " + match;
+    });
+    let newArr2 = word.split(' ');
+    newArr.push(...newArr2);
+  })
+  newArr = newArr.filter(el => el != '');
+  newStr = newArr.join('-');
+  newStr = newStr.toLowerCase();
+
+  console.log(arr, newArr, newStr);
+  return newStr;
+}
+
+spinalCase('This Is Spinal Tap');

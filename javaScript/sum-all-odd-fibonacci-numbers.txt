@@ -1,0 +1,17 @@
+function sumFibs(num) {
+  let sum = 2;
+  let fibArr = [1, 1];
+  let curIndx = 1;
+  let curFib = 2;
+  while (curFib <= num) {
+    if (curFib % 2 === 1) {
+      sum += curFib;
+    }
+    fibArr.push(curFib);
+    curFib = curFib + fibArr[curIndx];
+    curIndx++;
+  }
+  return sum;
+}
+
+sumFibs(4);

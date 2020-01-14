@@ -1,0 +1,24 @@
+function whatIsInAName(collection, source) {
+  // What's in a name?
+  var arr = [];
+  var addIt;
+  // Only change code below this line
+  collection.forEach(item => {
+    addIt = true;
+    for (let key in source) {
+      console.log(item, key, item[key], source[key]);
+      if (item[key] !== source[key]) {
+        addIt = false;
+      }
+    }
+    if (addIt === true) {
+      arr.push(item);
+    }
+  })
+  console.log(arr);
+
+  // Only change code above this line
+  return arr;
+}
+
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });

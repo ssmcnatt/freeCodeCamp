@@ -1,0 +1,48 @@
+function convertToRoman(num) {
+    let romanNum = '';
+    let one, five, ten, romanPart;
+
+    let digits = num.toString().split('');
+    digits = digits.reverse();
+
+    for (let indx = 0; indx < digits.length; indx++) {
+        switch (indx) {
+            case 0:
+                one = 'I'; five = 'V'; ten = 'X';
+                break;
+            case 1:
+                one = 'X'; five = 'L'; ten = 'C';
+                break;
+            case 2:
+                one = 'C'; five = 'D'; ten = 'M';
+                break;
+            case 3:
+                one = 'M';
+                break;
+        }
+
+        let num = parseInt(digits[indx]);
+        switch (num) {
+            case 1: case 2: case 3:
+                romanNum = one.repeat(num) + romanNum;
+                break;
+            case 4:
+                romanNum = one + five + romanNum;
+                break;
+            case 5:
+                romanNum = five + romanNum;
+                break;
+            case 6: case 7: case 8:
+                romanNum = five + one.repeat(num - 5) + romanNum;
+                break;
+            case 9:
+                romanNum = one + ten + romanNum;
+                break;
+        }
+        console.log(romanNum);
+    }
+    
+    return romanNum;
+}
+
+convertToRoman(36);

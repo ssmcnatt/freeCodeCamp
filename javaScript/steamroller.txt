@@ -1,0 +1,21 @@
+
+
+function steamrollArray(arr) {
+  // I'm a steamroller, baby
+  let newArr = [];
+
+  function recur(object) {
+    if (Array.isArray(object)) {
+      for (let item of object) {
+        recur(item);
+      }
+    } else {
+      newArr.push(object);
+    }
+  }
+  
+  recur(arr);
+  return newArr;
+}
+
+steamrollArray([1, [2], [3, [[4]]]]);

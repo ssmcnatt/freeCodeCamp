@@ -1,0 +1,77 @@
+function getChange(change, cid, changeObj) {
+  let changeArr = [], coinVal, coinTot, coinCount;
+  let coinVals = {"PENNY": 0.01, "NICKEL": 0.05, "DIME": 0.10,                      "QUARTER": 0.25, "ONE": 1.00, "FIVE": 5.00,                             "TEN": 10.00, "TWENTY": 20.00, "ONE HUNDRED": 100.00}
+  changeObj.change = [];
+
+  // console.log(cid);
+  for (let i = cid.length - 1; i >= 0; i--) {
+      coinVal = coinVals[cid[i][0]];
+      coinTot = cid[i][1];
+      // console.log(coinVal, coinTot);
+
+      coinCount = 0;
+      while (coinTot > 0) {
+        if (coinVal <= change) {
+          coinCount++;
+          change -= coinVal;
+          change = parseFloat(change.toFixed(2));
+        }
+        coinTot -= coinVal;
+      }
+      if (coinCount > 0) {
+        changeObj.change.push([cid[i][0], coinVal * coinCount]);
+        console.log(changeObj);
+      }
+      console.log(coinVal, coinCount, change);
+  }
+
+  if (change === 0) {
+    changeObj.status = 'OPEN';
+  } else {
+    changeObj.status = 'INSUFFICIENT_FUNDS';
+    changeObj.change = [];
+  }
+
+  return changeArr;
+}
+
+function checkCashRegister(price, cash, cid) {
+  let totalCash = 0, changeArr = [], changeObj = {};
+  let change = cash - price;
+
+  // Here is your change, ma'am.
+  cid.map(item => {
+    totalCash += item[1];
+  });
+  totalCash = parseFloat(totalCash.toFixed(2));
+  console.log('1', change, totalCash);
+
+  if (change > totalCash) {
+    console.log('gt');
+    changeObj.status = 'INSUFFICIENT_FUNDS';
+    changeObj.change = [];
+  } else if (change === totalCash) {
+    changeObj.status = 'CLOSED';
+    changeObj.change = cid;
+  } else {
+    console.log('change');
+    getChange(change, cid, changeObj);
+  }
+
+  console.log(changeObj);
+  return changeObj; 
+}
+
+// Example cash-in-drawer array:
+// [["PENNY", 1.01],
+// ["NICKEL", 2.05],
+// ["DIME", 3.1],
+// ["QUARTER", 4.25],
+// ["ONE", 90],
+// ["FIVE", 55],
+// ["TEN", 20],
+// ["TWENTY", 60],
+// ["ONE HUNDRED", 100]]
+
+// checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
+checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]])
